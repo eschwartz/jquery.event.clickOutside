@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .modal {
+            position: absolute;
+            z-index: 1090;
+            top: 20%;
+            width: 100%;
+        }
+            /* line 129, ../scss/style.scss */
+        .modal .modal-content {
+            margin: 0 auto;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.96);
+            z-index: 1090;
+            -webkit-box-shadow: 0 0 9999px 9999px rgba(0, 0, 0, 0.6);
+            -moz-box-shadow: 0 0 9999px 9999px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 0 9999px 9999px rgba(0, 0, 0, 0.6);
+            width: 800px;
+        }
+    </style>
+    <title>clickOutside Event Example</title>
+    <script type="text/javascript" src="lib/jquery.js"></script>
+    <script type="text/javascript" src="src/jquery.event.clickOutside.js"></script>
+</head>
+<body>
+    <button id="open">Open it.</button>
+    <div class="modal">
+        <div class="modal-content">
+            <h1>A modal window</h1>
+            <h5>Click anywhere outside the window to close</h5>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var $modal = $('.modal');
+            $('#open').click(function(e) {
+                $modal.fadeIn();
+
+                // prevents from immediately triggering `clickOutside` event
+                e.stopPropagation();
+            });
+
+            $modal.on('clickOutside', '.modal-content', function() {
+                $modal.fadeOut();
+            })
+        })
+    </script>
+</body>
+</html>
